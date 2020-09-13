@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Note Keeper Spring Boot, Thymeleaf, Hibernate Example</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+        #logo, #input_form {
+            text-align: center;
+        }
+
+        #logo_img {
+            border-radius: 10px;
+        }
+
+        #error_message {
+            color: red;
+        }
+
+        .textError {
+            border-color: red;
+            border-style: solid;
+        }
+
+        input[type=submit] {
+            width: 20em;  height: 4em;
+        }
+    </style>
+</head>
+<body>
+<div id="logo">
+    <img id="logo_img" src="logo.png"/>
+</div>
+<h2 align="center">Please add your note</h2>
+<form id="input_form" action = "#" th:action="@{/addNote}" th:object="${note}" method="POST">
+    <textarea cols="40" rows="10" name="text" th:field="*{text}" th:errorclass="textError" />
+    <br>
+    <input type="submit" value="Save" />
+    <br>
+    <h3 id="error_message" th:if="${#fields.hasErrors('text')}" th:errors=*{text}></h3>
+</form>
+</body>
+</html>
